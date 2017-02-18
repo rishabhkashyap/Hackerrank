@@ -17,18 +17,38 @@ public class TestClassMonkAndPrisoner {
 			arr[i]=io.nextInt();
 		}
 		for(int i=0;i<arr.length;i++){
-			System.out.print(getIndexFloor(arr, i)+" ");
+			System.out.print(getIndexFloor(arr, i+1)+getCeiling(arr, i+1)+" ");
+			//getIndexFloor(arr, i+1)+
+			//getCeiling(arr, i+1)
 		}
 		
 	}
-	
-	private  static int getIndexFloor(int[]arr,int index){
-		for(int i=1;i<index;i++){
-			if(arr[i]>arr[index]){
-				return i;
+	private static int getCeiling(int[]arr,int index){
+		int ceil=-1;
+		for(int i=0;i<index;i++){
+			if(arr[i]>arr[index-1]){
+				ceil=i;
+				
 			}
 		}
-		return -1;
+		if(ceil>=0){
+			return ceil+1;
+		}
+		return ceil;
+	}
+	
+	private  static int getIndexFloor(int[]arr,int index){
+		int floor=-1;
+		for(int i=index;i<arr.length;i++){
+			if(arr[i]>arr[index-1] ){				
+				floor=i;
+				break;
+			}
+		}
+		if(floor>=0){
+			return floor+1;
+		}
+		return floor;
 	}
 
 	static class IO {

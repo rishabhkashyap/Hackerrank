@@ -13,42 +13,51 @@ public class TestClassMonkAndPrisoner {
 		IO io=new IO(false);
 		int n=io.nextInt();
 		int []arr=new int[n];
+		int [] x=new int[n];
+		int []y=new int[n];
 		for(int i=0;i<n;i++){
 			arr[i]=io.nextInt();
 		}
 		for(int i=0;i<arr.length;i++){
-			System.out.print(getIndexFloor(arr, i+1)+getCeiling(arr, i+1)+" ");
-			//getIndexFloor(arr, i+1)+
-			//getCeiling(arr, i+1)
+			getX(arr, x, i);
+		}
+		getY(arr, y);
+		for(int i=0;i<y.length;i++){
+			System.out.print(x[i]+y[i]+" ");
 		}
 		
 	}
-	private static int getCeiling(int[]arr,int index){
-		int ceil=-1;
-		for(int i=0;i<index;i++){
-			if(arr[i]>arr[index-1]){
-				ceil=i;
-				
+	private static void getX(int[]arr,int []x,int i){
+		if(i==0){
+			x[0]=-1;
+			
+		}else{
+			if(arr[i-1]>arr[i]){
+				x[i]=i;
+			}else{
+				int index=x[i-1]-1;
+				while(index>=0&&arr[index]<=arr[i]){
+					index=x[index]-1;
+				}
+				x[i]=index<0?-1:index+1;
 			}
 		}
-		if(ceil>=0){
-			return ceil+1;
-		}
-		return ceil;
 	}
 	
-	private  static int getIndexFloor(int[]arr,int index){
-		int floor=-1;
-		for(int i=index;i<arr.length;i++){
-			if(arr[i]>arr[index-1] ){				
-				floor=i;
-				break;
+	private  static void getY(int[]arr,int []y){
+		y[y.length-1]=-1;
+		for(int i=y.length-2;i>=0;i--){
+			if(arr[i+1]>arr[i]){
+				y[i]=i+2;
+			}else{
+				int index=y[i+1]-1;
+				while(index>=0&&arr[index]<=arr[i]){
+					index=y[index]-1;
+				}
+				y[i]=index<0?-1:index+1;
 			}
 		}
-		if(floor>=0){
-			return floor+1;
-		}
-		return floor;
+		
 	}
 
 	static class IO {

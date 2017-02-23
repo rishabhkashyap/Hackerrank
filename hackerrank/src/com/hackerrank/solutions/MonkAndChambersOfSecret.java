@@ -14,102 +14,85 @@ import java.util.Queue;
 public class MonkAndChambersOfSecret {
 
 	public static void main(String[] args) throws Exception {
-		Queue<Integer> spiders = new LinkedList<>();
+		Queue<SpiderVal> spiders = new LinkedList<>();
 
 		IO io = new IO(false);
 		int n = io.nextInt();
 		int x = io.nextInt();
 		for (int i = 0; i < n; i++) {
-			spiders.offer(io.nextInteger());
+			SpiderVal spiderVal=new SpiderVal(io.nextInt(),i);
+			spiders.offer(spiderVal);
 		}
-		// copy content of orignal queue in temporary queue
-		Queue<Integer> spidersCopy = new LinkedList<>(spiders);
-
-		for (int k = 0; k < x; k++) {
-			int max = findMax(spidersCopy, x);
-			System.out.print(locateMax(spiders, max));
-		}
-
-	}
-
-	// method takes copy of orignal queue
-	// and dequeue x no of elements and copy it in temporary queue
-	// It then calls findMaxUtil to find max from temporary queue
-	/*
-	 * @param Queue<Integer>
-	 * 
-	 * @returns Integer
-	 */
-	private static Integer findMax(Queue<Integer> spiders, int x) {
-		Integer max = 0;
-		ArrayList<Integer> spiderTempQueue = new ArrayList<>();
-		// int noOfSpiders=0;
-		if (spiders.size() < x) {
-			while(!spiders.isEmpty())
-				spiderTempQueue.add(spiders.poll());
+		for(int i=0;i<x;i++){
+			SpiderVal val=enqueueSpiders(spiders,x);
+			if(val!=null){
+				System.out.print(val.getPos()+1+" ");
+			}
 			
-			max = findMaxUtil(spiderTempQueue);
-			for (int i = 0; i < spiderTempQueue.size(); i++) {
-				int spiderPower = spiderTempQueue.get(i);
-				if (spiderPower != max) {
-
-					if (spiderPower == 0) {
-						spiders.offer(0);
-					} else {
-						spiders.offer(spiderPower - 1);
-					}
-
-				}
-			}
-
-		} else {
-			for (int i = 0; i < x; i++) {
-				spiderTempQueue.add(spiders.poll());
-			}
-			max = findMaxUtil(spiderTempQueue);
-			for (int i = 0; i < spiderTempQueue.size(); i++) {
-				int spiderPower = spiderTempQueue.get(i);
-				if (spiderPower != max) {
-
-					if (spiderPower-1 == 0) {
-						spiders.offer(spiderPower);
-					} else {
-						spiders.offer(spiderPower - 1);
-					}
-
-				}
-			}
-
 		}
-
-		return max;
+		
 	}
-
-	private static int findMaxUtil(ArrayList<Integer> spiders) {
-		int max = Integer.MIN_VALUE;
-		List<Integer> spiderArray = new ArrayList<>(spiders);
-		if (spiderArray != null) {
-			for (int spider : spiderArray) {
-				if (spider > max) {
-					max = spider;
+	
+	private static SpiderVal  enqueueSpiders(Queue<SpiderVal>spiders,int x){
+		SpiderVal max=null;
+		SpiderVal currentSpider=null;
+		Queue<SpiderVal>tempQ=new LinkedList<>();
+		for(int i=0;i<x;i++){
+			if(spiders.isEmpty()){
+				break;
+			}
+			currentSpider=spiders.remove();
+			if(max==null||max.getValue()<currentSpider.getValue()){
+				max=currentSpider;
+			}
+			tempQ.add(currentSpider);
+			
+			
+		}
+		while(!tempQ.isEmpty()){
+			currentSpider=tempQ.remove();
+			if(currentSpider!=max){
+				if(currentSpider.getValue()!=0){
+					currentSpider.setValue(currentSpider.getValue()-1);
 				}
+				spiders.offer(currentSpider);
+				
 			}
 		}
 		return max;
-
 	}
 
-	private static int locateMax(Queue<Integer> spiders, int max) {
-		List<Integer> spiderArray = new ArrayList<>(spiders);
-		for (int i = 0; i < spiderArray.size(); i++) {
-			if (max == spiderArray.get(i)) {
-				return i + 1;
-			}
+
+	 
+	public static class SpiderVal{
+		private int value;
+		private int pos;
+		
+		
+		public SpiderVal(int value, int pos) {
+			super();
+			this.value = value;
+			this.pos = pos;
 		}
-		return -1;
+		
+		
+		public int getValue() {
+			return value;
+		}
+		public void setValue(int value) {
+			this.value = value;
+		}
+		public int getPos() {
+			return pos;
+		}
+		public void setPos(int pos) {
+			this.pos = pos;
+		}
+		
+		
 	}
-
-	static class IO {
+	//IO clas to read and display data
+		static class IO {
 		final private int BUFFER_SIZE = 1 << 21;
 		private BufferedInputStream din;
 		private BufferedWriter bw;

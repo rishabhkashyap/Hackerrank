@@ -1,5 +1,6 @@
 package com.hackerrank.solutions;
 
+import java.util.Scanner;
 import java.util.Stack;
 
 public class SolutionQueueFromStack {

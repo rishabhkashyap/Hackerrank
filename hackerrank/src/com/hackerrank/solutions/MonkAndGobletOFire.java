@@ -21,7 +21,7 @@ public class MonkAndGobletOFire {
 			if (inputLine.charAt(0) == 'E'){
 				int school=inputLine.charAt(2);
 				int rollNo=inputLine.charAt(4);
-				Student student=new Student(school,rollNo);
+				Student student=new Student(school-48,rollNo-48);
 				enqueue(studentsQueue,student);
 			}else{
 				Student student=studentsQueue.remove(0);
@@ -43,7 +43,7 @@ public class MonkAndGobletOFire {
 			}else{
 				int count=0;
 				int size=studentsQueue.size()-1;
-				while(studentsQueue.get(studentsQueue.size()-1).getSchool()!=student.getSchool() && studentsQueue.size()>0){
+				while(studentsQueue.size()>0 && studentsQueue.get(size).getSchool()!=student.getSchool() ){
 					tempStudentQueue.add(studentsQueue.remove(size));
 					--size;
 				}

@@ -18,42 +18,51 @@ public class MonkAndGobletOFire {
 		ArrayList<Student> studentsQueue = new ArrayList<>();
 		for (int i = 0; i < operations; i++) {
 			inputLine = io.readLine();
-			if (inputLine.charAt(0) == 'E'){
-				int school=inputLine.charAt(2);
-				int rollNo=inputLine.charAt(4);
-				Student student=new Student(school-48,rollNo-48);
-				enqueue(studentsQueue,student);
-			}else{
-				Student student=studentsQueue.remove(0);
-				System.out.println(student.getSchool()+" "+student.getRollNo());
+			if (inputLine.charAt(0) == 'E') {
+				int school = inputLine.charAt(2);
+				int rollNo = inputLine.charAt(4);
+				Student student = new Student(school - 48, rollNo - 48);
+				enqueue(studentsQueue, student);
+			} else {
+				Student student = studentsQueue.remove(0);
+				System.out.println(student.getSchool() + " " + student.getRollNo());
 			}
-				
 
 		}
 
 	}
 
+	private static boolean isFirstSchool(Student student, ArrayList<Student> studentQueue) {
+		for (Student stu : studentQueue) {
+			if (stu.getSchool() == student.getSchool()) {
+				return false;
+			}
+		}
+		return true;
+
+	}
+
 	private static void enqueue(ArrayList<Student> studentsQueue, Student student) {
-		ArrayList<Student>tempStudentQueue=new ArrayList<>();
-		if(studentsQueue.size()==0){
+		ArrayList<Student> tempStudentQueue = new ArrayList<>();
+		if (studentsQueue.size() == 0 || isFirstSchool(student, studentsQueue)) {
 			studentsQueue.add(student);
-		}else{
-			if(studentsQueue.get(studentsQueue.size()-1).getSchool()==student.getSchool()){
+		} else {
+			if (studentsQueue.get(studentsQueue.size() - 1).getSchool() == student.getSchool()) {
 				studentsQueue.add(student);
-			}else{
-				int count=0;
-				int size=studentsQueue.size()-1;
-				while(studentsQueue.size()>0 && studentsQueue.get(size).getSchool()!=student.getSchool() ){
+			} else {
+				int count = 0;
+				int size = studentsQueue.size() - 1;
+				while (studentsQueue.size() > 0 && studentsQueue.get(size).getSchool() != student.getSchool()) {
 					tempStudentQueue.add(studentsQueue.remove(size));
 					--size;
 				}
 				studentsQueue.add(student);
-				for(int i=0;i<tempStudentQueue.size();i++){
+				for (int i = 0; i < tempStudentQueue.size(); i++) {
 					studentsQueue.add(tempStudentQueue.remove(i));
 				}
 			}
 		}
-		
+
 	}
 
 	public static class Student {

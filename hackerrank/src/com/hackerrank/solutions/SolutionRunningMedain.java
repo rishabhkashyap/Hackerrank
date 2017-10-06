@@ -1,6 +1,5 @@
 package com.hackerrank.solutions;
 
-import java.util.Locale.LanguageRange;
 import java.util.PriorityQueue;
 import java.util.Scanner;
 
@@ -14,14 +13,18 @@ public class SolutionRunningMedain {
 		int[] a = new int[n];
 		for (int a_i = 0; a_i < n; a_i++) {
 			a[a_i] = in.nextInt();
-			
-		}
-		for(int i=0;i<a.length;i++){
-			addVal(a[i],lowVals,highVals);
+			addVal(a[a_i],lowVals,highVals);
 			rebalance(lowVals,highVals);
 			double medain=getMedain(lowVals,highVals);
 			System.out.println(medain);
+			
 		}
+//		for(int i=0;i<a.length;i++){
+//			addVal(a[i],lowVals,highVals);
+//			rebalance(lowVals,highVals);
+//			double medain=getMedain(lowVals,highVals);
+//			System.out.println(medain);
+//		}
 
 	}
 
@@ -37,11 +40,11 @@ public class SolutionRunningMedain {
 
 	private static void rebalance(PriorityQueue<Integer> lowVals, PriorityQueue<Integer> highVals) {
 		PriorityQueue<Integer>biggerHeap=lowVals.size()>highVals.size()?lowVals:highVals;
-		PriorityQueue<Integer>smallerHeap=lowVals.size()<highVals.size()?lowVals:highVals;
+		PriorityQueue<Integer>smallerHeap=lowVals.size()<highVals.size()?lowVals:highVals;		
 		if(biggerHeap.size()-smallerHeap.size()>=2){
 			smallerHeap.offer(biggerHeap.poll());
-		}
 		
+		}
 		
 	}
 

@@ -1,4 +1,4 @@
-//Problem: https://leetcode.com/problems/partition-to-k-equal-sum-subsets/description/
+//Problem: https://leetcode.com/problems/partition-equal-subset-sum/description/
 package com.problem.solutions.leetcode;
 
 import java.io.BufferedReader;

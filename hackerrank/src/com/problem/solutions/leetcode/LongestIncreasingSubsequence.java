@@ -18,6 +18,7 @@ public class LongestIncreasingSubsequence {
             arr[i] = Integer.parseInt(tokenizer.nextToken());
         }
         System.out.println(longestIncreasingSubsequenceLength(arr));
+        System.out.println(longestIncreasingSubsequenceLen(arr));
     }
 
     private static int longestIncreasingSubsequenceLength(int[] arr) {
@@ -26,7 +27,6 @@ public class LongestIncreasingSubsequence {
             Arrays.fill(dpArr, -1);
         }
         return longestIncreasingSubsequenceLength(arr, -1, 0, dp);
-        //return lengthofLIS(arr, Integer.MIN_VALUE, 0);
     }
 
     private static int longestIncreasingSubsequenceLength(int[] arr, int previousIndex, int currentIndex,
@@ -48,6 +48,32 @@ public class LongestIncreasingSubsequence {
         return dp[previousIndex + 1][currentIndex];
     }
 
+    private static int longestIncreasingSubsequenceLen(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return 0;
+        }
+        int[] dp = new int[arr.length];
+
+        Arrays.fill(dp, 1);
+        int maxLen = 1;
+        for (int i = 1; i < arr.length; i++) {
+            /*
+             1. dp[i]: The best answer so far for the LIS from 0...i
+             2. dp[j] + 1: The value of maxLength[j] is the length
+                of the LIS from 0...j, we conceptually "append" this item to
+                that LIS by adding 1 to that subproblem answer, yielding a
+                potentially new answer for LIS[0..i]
+            * */
+            for (int j = 0; j < i; j++) {
+                if (arr[i] > arr[j]) {
+                    dp[i] = Math.max(dp[i], dp[j] + 1);
+                }
+
+            }
+            maxLen = Math.max(maxLen, dp[i]);
+        }
+        return maxLen;
+    }
 
 
 }

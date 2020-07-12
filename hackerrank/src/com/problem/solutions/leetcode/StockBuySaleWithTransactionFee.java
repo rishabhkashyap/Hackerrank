@@ -80,8 +80,9 @@ public class StockBuySaleWithTransactionFee {
         int[] hold = new int[arr.length];
         hold[0] = -arr[0];
         for (int i = 1; i < arr.length; i++) {
-            hold[i] = Math.max(hold[i - 1], sell[i - 1] - arr[i]);
             sell[i] = Math.max(sell[i - 1], hold[i - 1] + arr[i] - fees);
+            hold[i] = Math.max(hold[i - 1], sell[i - 1] - arr[i]);
+
 
         }
         return sell[arr.length - 1];

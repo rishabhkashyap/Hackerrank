@@ -33,7 +33,8 @@ public class UniqueBST {
         for (int i = 1; i <= num; ++i) {
             result += countBST(i - 1, dp) * countBST(num - i, dp);
         }
-        return result;
+        dp[num]=result;
+        return dp[num];
 
     }
 

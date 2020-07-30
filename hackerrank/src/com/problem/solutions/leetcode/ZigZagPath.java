@@ -34,14 +34,16 @@ public class ZigZagPath {
         }
         result = Math.max(result, count);
         if (moveLeft) {
-            //Move to left and increment count
+            //move right and increment count
             longestZigZagPath2(root.left, false, count + 1);
-            //Use this node as starting point of traversal
-            longestZigZagPath2(root.left, true, 1);
+
+            //use right node as starting point and move left
+            longestZigZagPath2(root.right, true, 1);
         } else {
-            //Move to right and increment count
+            //move left and increment count
             longestZigZagPath2(root.right, true, count + 1);
-            //Use this node as starting point of traversal
+
+            //use left node as starting point and move right
             longestZigZagPath2(root.left, false, 1);
         }
 

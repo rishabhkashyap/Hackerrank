@@ -52,9 +52,9 @@ public class LargestAverageSum {
             return dp[i][k];
         }
 
-        double result = 0;
+
         for (int j = i; j < arr.length; j++) {
-            //preSum[j] - preSum[i]: sum of elements from i to j where j is excluded and i in included
+            //preSum[j] - preSum[i]: sum of elements from i to j where i is excluded and j in included
             double result1 = ((preSum[j] - preSum[i] + arr[i]) / (j - i + 1));
             double result2 = calculateLargestAverageSum(arr, k - 1, j + 1, preSum, dp);
             dp[i][k] = Math.max(dp[i][k], (result1 + result2));

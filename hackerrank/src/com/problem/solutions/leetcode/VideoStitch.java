@@ -5,7 +5,7 @@ import java.util.Arrays;
 
 public class VideoStitch {
     public static void main(String[] args) {
-         int[][] clips = {{0, 2}, {4, 6}, {8, 10}, {1, 9}, {1, 5}, {5, 9}};
+        int[][] clips = {{0, 2}, {4, 6}, {8, 10}, {1, 9}, {1, 5}, {5, 9}};
 //        int[][] clips = {{0, 1}, {1, 2}};
         int time = 10;
         System.out.println(findMinClips1(clips, time));
@@ -37,7 +37,7 @@ public class VideoStitch {
         int min = 0;
         int max = 0;
         int totalClips = 0;
-        while (max<time) {
+        while (max < time) {
             int left = 0;
             int right = 0;
             for (int i = 0; i < clips.length; i++) {
@@ -47,7 +47,7 @@ public class VideoStitch {
                     max = right;
                 }
             }
-            if(min==max){
+            if (min == max) {
                 return -1;
             }
             min = max;

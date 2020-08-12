@@ -58,7 +58,8 @@ public class LongestIncreasingSubsequence {
         int maxLen = 1;
         for (int i = 1; i < arr.length; i++) {
             /*
-             1. dp[i]: The best answer so far for the LIS from 0...i
+             1. dp[i]: count of increasing elements if i th element  satisfies increasing subsequence
+                condition.
              2. dp[j] + 1: The value of maxLength[j] is the length
                 of the LIS from 0...j, we conceptually "append" this item to
                 that LIS by adding 1 to that subproblem answer, yielding a

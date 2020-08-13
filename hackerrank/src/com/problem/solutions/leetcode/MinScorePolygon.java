@@ -52,7 +52,7 @@ public class MinScorePolygon {
 
     private static int findMinScoreTriangulation2(int[] arr) {
         int[][] dp = new int[arr.length + 1][arr.length + 1];
-        for (int vertices = 2; vertices < arr.length; vertices++) {
+        for (int vertices = 2; vertices <= arr.length; vertices++) {
             for (int left = 0; left < arr.length - vertices; left++) {
                 int right = left + vertices;
                 dp[left][right] = Integer.MAX_VALUE;

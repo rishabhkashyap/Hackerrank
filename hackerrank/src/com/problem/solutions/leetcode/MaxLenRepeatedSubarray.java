@@ -68,8 +68,6 @@ public class MaxLenRepeatedSubarray {
                 if (arr1[i - 1] == arr2[j - 1]) {
                     dp[i][j] = ++dp[i - 1][j - 1];
                     maxLen = Math.max(maxLen, dp[i][j]);
-                } else {
-                    dp[i][j] = 0;
                 }
             }
         }

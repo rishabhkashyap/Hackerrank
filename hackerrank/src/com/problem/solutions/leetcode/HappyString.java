@@ -34,8 +34,7 @@ public class HappyString {
                 break;
             }
             int length = stringBuilder.length();
-            if (length < 2 || (stringBuilder.charAt(length - 1) != maxFreqLetter.getCharacter()
-                    || stringBuilder.charAt(length - 2) != maxFreqLetter.getCharacter())) {
+            if (canAddMaxFreqLetter(stringBuilder, maxFreqLetter.getCharacter())) {
                 stringBuilder.append(maxFreqLetter.getCharacter());
                 maxFreqLetter.setCount(maxFreqLetter.getCount() - 1);
 
@@ -54,6 +53,13 @@ public class HappyString {
         }
         return stringBuilder.toString();
 
+    }
+
+    private static boolean canAddMaxFreqLetter(StringBuilder stringBuilder, char character) {
+        int length = stringBuilder.length();
+
+        return length < 2 || (stringBuilder.charAt(length - 1) != character
+                || stringBuilder.charAt(length - 2) != character);
     }
 
     private static class Letter {

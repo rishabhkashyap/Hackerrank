@@ -33,7 +33,6 @@ public class HappyString {
             if (maxFreqLetter.getCount() == 0) {
                 break;
             }
-            int length = stringBuilder.length();
             if (canAddMaxFreqLetter(stringBuilder, maxFreqLetter.getCharacter())) {
                 stringBuilder.append(maxFreqLetter.getCharacter());
                 maxFreqLetter.setCount(maxFreqLetter.getCount() - 1);

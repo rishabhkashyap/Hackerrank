@@ -14,9 +14,14 @@ public class PushDominoes {
         System.out.println(result);
     }
 
+    //compare value of leftDistance[i] and rightDistance[i] ,whichever value is small,domino will fall that side,
+    //if bot values are equal domino[i] will not fall
     private static String pushDominoes(String string) {
         char[] arr = string.toCharArray();
+        //leftDistance[i]: smallest distance between domino[i] and L
         int[] leftDistance = new int[arr.length];
+
+        //rightDistance[i]: smallest distance between domino[i] and R
         int[] rightDistance = new int[arr.length];
         int distance = arr.length;
         for (int i = 0; i < arr.length; i++) {

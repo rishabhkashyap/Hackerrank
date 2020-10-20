@@ -17,12 +17,13 @@ public class StockBuySale {
             arr[i] = Integer.parseInt(tokenizer.nextToken());
         }
         System.out.println(findMaxProfit(arr, arr.length - 2, arr[arr.length - 1]));
+        System.out.println(findMaXProfit2(arr));
 
     }
 
     private static int findMaxProfit(int[] arr, int index, int maxPrice) {
         if (index == 0) {
-            return maxPrice-arr[0]>=0?maxPrice-arr[0]:0;
+            return maxPrice - arr[0] >= 0 ? maxPrice - arr[0] : 0;
         }
         int maxProfit = 0;
         if (arr[index] > maxPrice) {
@@ -32,5 +33,17 @@ public class StockBuySale {
         }
         return Math.max(maxProfit, maxPrice - arr[index]);
 
+    }
+
+    private static int findMaXProfit2(int[] arr) {
+        int maxPrice = arr[arr.length - 1];
+        int maxProfit = 0;
+        for (int i = arr.length - 2; i >= 0; i--) {
+            maxProfit = Math.max(maxPrice - arr[i], maxProfit);
+            if (maxPrice < arr[i]) {
+                maxPrice = arr[i];
+            }
+        }
+        return maxProfit;
     }
 }

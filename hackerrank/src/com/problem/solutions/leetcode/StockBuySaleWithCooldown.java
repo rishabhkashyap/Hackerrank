@@ -63,6 +63,9 @@ public class StockBuySaleWithCooldown {
 
     }
 
+//    buy[i]: Max profit till index i. The series of transaction is ending with a buy.
+//    sell[i]: Max profit till index i. The series of transaction is ending with a sell.
+
     private static int findMaxProfit2(int[] arr) {
         int[] sell = new int[arr.length];
         int[] buy = new int[arr.length];

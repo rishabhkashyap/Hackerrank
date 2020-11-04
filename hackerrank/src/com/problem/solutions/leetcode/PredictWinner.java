@@ -24,6 +24,9 @@ public class PredictWinner {
         }
     }
 
+    //Player 1 plays in such a way that it leaves rest of array in a state
+    //where player2 can only pick minimum value.Therefore for player 2
+    //pick minimum of 2 choices
     private static boolean predictWinner1(int[] scores) {
         Map<String, Integer> map = new HashMap<>();
         return predictWinner1(scores, 0, scores.length - 1, 0, map) >= 0 ? true : false;

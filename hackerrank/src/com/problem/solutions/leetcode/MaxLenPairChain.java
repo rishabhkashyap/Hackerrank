@@ -51,6 +51,7 @@ public class MaxLenPairChain {
     private static int findMaxPairChainLen2(int[][] arr) {
         int[] dp = new int[arr.length];
         Arrays.fill(dp, 1);
+        int maxLen = 1;
         Arrays.sort(arr, (a, b) -> a[0] - b[0]);
         for (int i = 1; i < arr.length; i++) {
             for (int j = 0; j < i; j++) {
@@ -58,9 +59,10 @@ public class MaxLenPairChain {
                     dp[i] = Math.max(dp[i], dp[j] + 1);
                 }
             }
+            maxLen = Math.max(dp[i], maxLen);
 
         }
-        return dp[arr.length - 1];
+        return maxLen;
     }
 
 

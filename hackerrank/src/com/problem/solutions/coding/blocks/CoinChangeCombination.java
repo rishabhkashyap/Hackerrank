@@ -2,7 +2,7 @@ package com.problem.solutions.coding.blocks;
 
 import java.util.Arrays;
 
-public class CoinChange {
+public class CoinChangeCombination {
     public static void main(String[] args) {
 //        int[] arr = {1, 2, 3};
 //        int target = 4;

@@ -1,3 +1,5 @@
+//Problem: hackerearth.com/problem/algorithm/mancunian-and-k-ordered-lcs-e6a4b8c6/
+
 package com.problem.solutions.hackerearth;
 
 import java.io.BufferedReader;
@@ -27,13 +29,24 @@ public class KOrderLCS {
     }
 
     private static int longestSubSeqLen(int[] arr1, int[] arr2, int k) {
-        int[][] dp = new int[arr1.length][arr2.length];
+        int[][][] dp = new int[arr1.length][arr2.length][k+1];
+        for (int i = 0; i < arr1.length; i++) {
+            for (int j = 0; j < arr2.length; j++) {
+                for (int m = 0; m < k+1; m++) {
+                    dp[i][j][m] = -1;
+                }
+
+            }
+        }
         return longestSubSeqLen(arr1, arr2, 0, 0, k, dp);
     }
 
-    private static int longestSubSeqLen(int[] arr1, int[] arr2, int i, int j, int k, int[][] dp) {
+    private static int longestSubSeqLen(int[] arr1, int[] arr2, int i, int j, int k, int[][][] dp) {
         if (i >= arr1.length || j >= arr2.length) {
             return 0;
+        }
+        if (dp[i][j][k] != -1) {
+            return dp[i][j][k];
         }
         if (arr1[i] == arr2[j]) {
             return longestSubSeqLen(arr1, arr2, i + 1, j + 1, k, dp) + 1;
@@ -44,6 +57,7 @@ public class KOrderLCS {
         }
         int result1 = longestSubSeqLen(arr1, arr2, i + 1, j, k, dp);
         int result2 = longestSubSeqLen(arr1, arr2, i, j + 1, k, dp);
-        return Math.min(result1, result2);
+        dp[i][j][k] = Math.max(result1, result2);
+        return dp[i][j][k];
     }
 }

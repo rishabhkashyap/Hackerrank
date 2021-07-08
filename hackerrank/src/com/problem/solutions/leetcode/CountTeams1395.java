@@ -1,63 +1,57 @@
 package com.problem.solutions.leetcode;
-
-import java.util.Arrays;
+//Problem: https://leetcode.com/problems/count-number-of-teams/
 
 public class CountTeams1395 {
     public static void main(String[] args) {
-        int[] arr = {2,5,3,4,1};
+        int[] arr = {2, 5, 3, 4, 1};
         System.out.println(countTeams(arr));
     }
 
+    /*
+    Find out how many triplets are possible if current element is in middle
+    count element that are greater and lesser than current element in left and right direction
+    Use those count to calculate following scenarios
+    number of triplets in decreasing order where current element is mid element
+        count1=all elements that are less then current in left* all elements that are larger than element
+    number of triplets in increasing order where current element is mid element
+        count2=all elements that are greater then current in left* all elements that are less than current element
+        Final result=count1+count2
+    */
     private static int countTeams(int[] arr) {
-        //Arrays.sort(arr);
-        return (countTeams1(arr, 1,0 ,arr[0])+countTeams2(arr, 1,0 ,arr[0]));
+        int count = 0;
+        for (int i = 0; i < arr.length; i++) {
+            count += countLessRating(arr, i);
+
+        }
+        return count;
     }
 
-    private static int countTeams1(int[] arr, int j, int count,int prev) {
-        if (arr.length < 3) {
-            return 0;
-        }
-        if(j>=arr.length){
-            return 0;
-        }
-        if(arr.length-j<3){
-            return 0;
-        }
-        if (count % 3 == 1) {
-            return 1;
-        }
+    private static int countLessRating(int[] arr, int i) {
+        int leftSmall = 0;
+        int leftLarge = 0;
+        int rightSmall = 0;
+        int rightLarge = 0;
 
-        int sum = 0;
-        for (int i = j; i < arr.length; i++) {
-            if(prev<arr[i]){
-                sum += countTeams1(arr, i + 1, count + 1,arr[i]);
+        int j = 0;
+        int k = arr.length - 1;
+        while (j < i) {
+            if (arr[i] > arr[j]) {
+                ++leftSmall;
+            } else {
+                ++leftLarge;
             }
-
+            ++j;
         }
-        return sum;
-    }
-    private static int countTeams2(int[] arr, int j, int count,int prev) {
-        if (arr.length < 3) {
-            return 0;
-        }
-
-        if(j>=arr.length){
-            return 0;
-        }
-        if(arr.length-j<3){
-            return 0;
-        }
-        if (count % 3 == 1) {
-            return 1;
-        }
-
-        int sum = 0;
-        for (int i = j; i < arr.length; i++) {
-            if(prev>arr[i]){
-                sum += countTeams2(arr, i + 1, count + 1,arr[i]);
+        while (k > i) {
+            if (arr[i] > arr[k]) {
+                ++rightSmall;
+            } else {
+                ++rightLarge;
             }
-
+            --k;
         }
-        return sum;
+        return (leftSmall * rightLarge) + (leftLarge * rightSmall);
     }
+
+
 }

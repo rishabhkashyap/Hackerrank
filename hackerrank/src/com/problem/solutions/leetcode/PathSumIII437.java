@@ -1,6 +1,14 @@
 package com.problem.solutions.leetcode;
 
+import java.util.HashSet;
+import java.util.Set;
+
+//Problem: https://leetcode.com/problems/path-sum-iii/
+
 public class PathSumIII437 {
+
+    private static int targetSum;
+
     public static void main(String[] args) {
         TreeNode treeNode10 = new TreeNode(10);
         TreeNode treeNode5 = new TreeNode(5);
@@ -14,17 +22,18 @@ public class PathSumIII437 {
         treeNode10.right = treeNode3_;
         treeNode5.left = treeNode3;
         treeNode5.right = treeNode2;
-        treeNode2.right=treeNode1;
+        treeNode2.right = treeNode1;
         treeNode3.left = new TreeNode(3);
         treeNode3.right = treeNode2_;
         treeNode3_.right = treeNode11;
         System.out.println(pathSumHelper(treeNode10, 8));
+        System.out.println(countPathSum2(treeNode10, 8));
 
 
     }
 
     private static int pathSumHelper(TreeNode root, int target) {
-        if(root==null){
+        if (root == null) {
             return 0;
         }
         int result = countPathSum(root, target);
@@ -44,6 +53,34 @@ public class PathSumIII437 {
             return left + right + 1;
         }
         return left + right;
+    }
+
+
+    private static int countPathSum2(TreeNode root, int target) {
+        targetSum = target;
+        Set<TreeNode> set = new HashSet<>();
+        return countPathSum2(root, target, set, false);
+    }
+
+    private static int countPathSum2(TreeNode root, int target, Set<TreeNode> set, boolean hasParent) {
+        if (root == null) {
+            return 0;
+        }
+        //Check if node is already considered has starting node to find sum
+        if (target == targetSum && set.contains(root) && !hasParent) {
+            return 0;
+        }
+        //if node is a starting point add it to set
+        if (target == targetSum && !hasParent) {
+            set.add(root);
+        }
+        int count = target == root.val ? 1 : 0;
+        count += countPathSum2(root.left, target - root.val, set, true);
+        count += countPathSum2(root.right, target - root.val, set, true);
+        count += countPathSum2(root.left, targetSum, set, false);
+        count += countPathSum2(root.right, targetSum, set, false);
+        return count;
+
     }
 
 

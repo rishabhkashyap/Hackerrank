@@ -5,15 +5,22 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+//Problem: https://leetcode.com/problems/number-of-good-ways-to-split-a-string/
+
+
 public class GoodSplit1525 {
     public static void main(String[] args) {
-        String str = "aacaba";
+        String str = "abcd";
         System.out.println(findGoodSplit(str));
     }
 
     private static int findGoodSplit(String str) {
         Map<String, Integer> map = new HashMap<>();
+        //Number of unique character from 0 ... len-1
         int[] prefix = new int[str.length()];
+
+        //Number of unique characters from len-1 ....0
+        int[] suffix = new int[str.length()];
         prefix[0] = 1;
         Set<Character> set = new HashSet<>();
         set.add(str.charAt(0));
@@ -22,44 +29,27 @@ public class GoodSplit1525 {
             prefix[i] = set.size();
 
         }
-        return findGoodSplit(str.toCharArray(), 0, 0, str.length() - 1, map);
+        set.clear();
+        suffix[str.length() - 1] = 1;
+        set.add(str.charAt(str.length() - 1));
+        for (int i = str.length() - 2; i >= 0; --i) {
+            set.add(str.charAt(i));
+            suffix[i] = set.size();
+        }
+        int count = 0;
+        for (int i = 0; i < str.length() - 1; i++) {
+            if (prefix[i] == suffix[i + 1]) {
+                ++count;
+            }
+        }
+
+        return count;
     }
 
-    private static int findGoodSplit(char[] arr, int start, int mid, int end, Map<String, Integer> map) {
-        if (mid + 1 > arr.length) {
-            return 0;
-        }
-        int distinctS1 = 0;
-        int distinctS2 = 0;
-        String key1 = start + "_" + mid;
-        int s2Start = mid + 1;
-        String key2 = s2Start + "_" + end;
-        if (map.containsKey(key1)) {
-            distinctS1 = map.get(key1);
-        } else {
-            distinctS1 = countUniqueChars(arr, start, mid);
-            map.put(key1, distinctS1);
-        }
-        if (map.containsKey(key2)) {
-            distinctS2 = map.get(key2);
-        } else {
-            distinctS2 = countUniqueChars(arr, mid + 1, end);
-            map.put(key2, distinctS2);
-        }
+//    private static int findGoodSplit(char[] arr, int start, int mid, int end, Map<String, Integer> map) {
+//
+//
+//    }
 
-        if (distinctS1 == distinctS2) {
-            return findGoodSplit(arr, start, mid + 1, end, map) + 1;
-        }
-        return findGoodSplit(arr, start, mid + 1, end, map);
 
-    }
-
-    private static int countUniqueChars(char[] arr, int start, int end) {
-        Set<Character> set = new HashSet<>();
-        for (int i = start; i <= end; i++) {
-            set.add(arr[i]);
-
-        }
-        return set.size();
-    }
 }

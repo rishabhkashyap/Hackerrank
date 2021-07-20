@@ -1,7 +1,7 @@
 package com.problem.solutions.leetcode;
 
+import java.util.Arrays;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -16,28 +16,31 @@ public class PowerValue1387 {
 
     private static int findPowerValue(int low, int high, int k) {
         Map<Integer, Integer> map = new HashMap<>();
+        int[] dp = new int[1001];
+        Arrays.fill(dp, -1);
         for (int i = low; i <= high; i++) {
-            map.put(i, findPowerValue(i));
+            map.put(i, findPowerValue(i, dp));
         }
-//        List<Map.Entry<Integer, Integer>> list = map.entrySet().stream()
-//                .sorted(Map.Entry.comparingByValue())
-//                .collect(Collectors.toList());
-//        return list.get(k-1).getKey();
-        map.entrySet().stream()
+        List<Map.Entry<Integer, Integer>> list = map.entrySet().stream()
                 .sorted(Map.Entry.comparingByValue())
-                .collect(Collectors.toMap(e->e.getKey(),e->e.getValue(),(e1,e2)->e1,LinkedHashMap::new));
+                .collect(Collectors.toList());
+        return list.get(k - 1).getKey();
+
     }
 
 
-    private static int findPowerValue(int num) {
+    private static int findPowerValue(int num, int[] dp) {
         if (num == 1) {
             return 0;
         }
+        if (dp[num] != -1) {
+            return dp[num];
+        }
         int count = 0;
         if (num % 2 == 0) {
-            count = findPowerValue(num / 2) + 1;
+            count = findPowerValue(num / 2, dp) + 1;
         } else {
-            count = findPowerValue(num * 3 + 1) + 1;
+            count = findPowerValue(num * 3 + 1, dp) + 1;
         }
         return count;
     }

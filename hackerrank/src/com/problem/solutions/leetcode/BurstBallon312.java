@@ -26,13 +26,13 @@ public class BurstBallon312 {
         }
 
         int result = Integer.MIN_VALUE;
-        for (int k = i; k <= j; k++) {
+        for (int last = i; last <= j; last++) {
 
             int left = i - 1 < 0 ? 1 : arr[i - 1];
             int right = j + 1 >= arr.length ? 1 : arr[j + 1];
-            int temp = left * arr[k] * right;
-            temp += maxValue(arr, i, k - 1,dp);
-            temp += maxValue(arr, k + 1, j,dp);
+            int temp = left * arr[last] * right;
+            temp += maxValue(arr, i, last - 1,dp);
+            temp += maxValue(arr, last + 1, j,dp);
             result = Math.max(result, temp);
 
         }

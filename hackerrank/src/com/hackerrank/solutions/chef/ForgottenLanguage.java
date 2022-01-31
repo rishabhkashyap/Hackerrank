@@ -1,6 +1,6 @@
 package com.hackerrank.solutions.chef;
 
-import sun.util.resources.cldr.kea.TimeZoneNames_kea;
+
 
 import java.io.BufferedReader;
 import java.io.IOException;

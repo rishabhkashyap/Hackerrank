@@ -8,7 +8,7 @@ import java.util.Arrays;
 import java.util.StringTokenizer;
 
 
-public class EqualSubset {
+public class EqualSubset416 {
     public static void main(String[] args) throws IOException {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer tokenizer = new StringTokenizer(bufferedReader.readLine(), ",");
@@ -20,33 +20,42 @@ public class EqualSubset {
         System.out.println(isEqualSubsetAvailable2(arr));
     }
 
-    private static boolean isEqualSubsetAvailable1(int[] arr) {
-        double sum = Arrays.stream(arr).sum();
-        int[][] dp = new int[arr.length + 1][(int) sum + 1];
-        for (int[] dpArr : dp) {
-            Arrays.fill(dpArr, -1);
+    private static boolean isEqualSubsetAvailable1(int[] nums) {
+        int sum = 0;
+        for (int i = 0; i < nums.length; i++) {
+            sum += nums[i];
         }
-        return isEqualSubsetAvailable1(arr, sum / 2, 0, dp);
+        if (sum % 2 == 1) {
+            return false;
+        }
+        int[][] dp = new int[nums.length + 1][sum / 2 + 1];
+        for (int[] arr : dp) {
+            Arrays.fill(arr, -1);
+        }
+        return isEqualSubsetAvailable1(nums, 0, 0, sum / 2, dp);
 
     }
 
-    private static boolean isEqualSubsetAvailable1(int[] arr, double target, int i,
+    private static boolean isEqualSubsetAvailable1(int[] arr, int i, int curSum, int sum,
                                                    int[][] dp) {
-        if (target == 0) {
-            return true;
-        }
-        if (target < 0 || i >= arr.length) {
+        if (i >= arr.length) {
             return false;
         }
-        if (dp[i][(int) target] == 1) {
-            return true;
-        } else if (dp[i][(int) target] == 2) {
+        if (curSum > sum) {
             return false;
         }
-        boolean result1 = isEqualSubsetAvailable1(arr, target - arr[i], i + 1, dp);
-        boolean result2 = isEqualSubsetAvailable1(arr, target, i + 1, dp);
-        dp[i][(int) target] = result1 || result2 == true ? 1 : 2;
-        return result1 || result2;
+        if (curSum == sum) {
+            return true;
+        }
+        if (dp[i][curSum] != -1) {
+            return dp[i][curSum] == 1 ? true : false;
+        }
+        boolean result1 = isEqualSubsetAvailable1(arr, i + 1, curSum + arr[i], sum, dp);
+        boolean result2 = isEqualSubsetAvailable1(arr, i + 1, curSum, sum, dp);
+        boolean result = result1 || result2;
+        dp[i][curSum] = result == true ? 1 : 2;
+        return result;
+
     }
 
 
@@ -55,11 +64,11 @@ public class EqualSubset {
         if (sum % 2 == 1) {
             return false;
         }
-        return isEqualSubsetAvailable1(arr, sum / 2);
+        return isEqualSubsetAvailable2(arr, sum / 2);
 
     }
 
-    private static boolean isEqualSubsetAvailable1(int[] arr, int target) {
+    private static boolean isEqualSubsetAvailable2(int[] arr, int target) {
         boolean[][] dp = new boolean[arr.length + 1][target + 1];
         for (int i = 0; i < dp.length; i++) {
             Arrays.fill(dp[i], false);

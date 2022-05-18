@@ -7,7 +7,7 @@ import java.util.Arrays;
 
 //Problem: https://leetcode.com/problems/longest-common-subsequence/description/
 
-public class LongestCommonSubSequence {
+public class LongestCommonSubSequence1143 {
 
     public static void main(String[] args) throws IOException {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));

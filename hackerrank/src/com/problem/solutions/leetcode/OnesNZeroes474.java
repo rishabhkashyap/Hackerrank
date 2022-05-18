@@ -8,7 +8,7 @@ import java.util.StringTokenizer;
 
 //Problem: https://leetcode.com/problems/ones-and-zeroes/description/
 
-public class OnesNZeroes {
+public class OnesNZeroes474 {
 
     public static void main(String[] args) throws IOException {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));

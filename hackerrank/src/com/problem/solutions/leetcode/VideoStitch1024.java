@@ -3,13 +3,14 @@ package com.problem.solutions.leetcode;
 
 import java.util.Arrays;
 
-public class VideoStitch {
+public class VideoStitch1024 {
     public static void main(String[] args) {
         int[][] clips = {{0, 2}, {4, 6}, {8, 10}, {1, 9}, {1, 5}, {5, 9}};
 //        int[][] clips = {{0, 1}, {1, 2}};
         int time = 10;
         System.out.println(findMinClips1(clips, time));
         System.out.println(findMinClips2(clips, time));
+        System.out.println(findMinClips3(clips, time));
 
     }
 
@@ -54,5 +55,44 @@ public class VideoStitch {
             ++totalClips;
         }
         return totalClips;
+    }
+
+    //Dp solution similar to the longest increasing subsequence
+    private static int findMinClips3(int[][] clips, int time) {
+        int max = Integer.MIN_VALUE;
+        for (int[] arr : clips) {
+            if (arr[1] > max) {
+                max = arr[1];
+            }
+        }
+        if (max < time) {
+            return -1;
+        }
+        Arrays.sort(clips, (e1, e2) -> e1[0] - e2[0]);
+        int[] dp = new int[clips.length];
+        for (int i = 0; i < clips.length; i++) {
+            if (clips[i][0] == 0) {
+                dp[i] = 1;
+            } else {
+                dp[i] = 99999;
+            }
+        }
+        int result = 99999;
+        for (int i = 1; i < clips.length; ++i) {
+            for (int j = 0; j < i; ++j) {
+                int c1End = clips[j][1];
+                int c2Start = clips[i][0];
+                int c2End = clips[i][1];
+                if (c1End >= c2Start && c2End >= c1End) {
+                    dp[i] = Math.min(dp[i], dp[j] + 1);
+                }
+            }
+        }
+        for (int i = 0; i < clips.length; i++) {
+            if (time <= clips[i][1]) {
+                result = Math.min(result, dp[i]);
+            }
+        }
+        return result == 99999 ? -1 : result;
     }
 }

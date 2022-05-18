@@ -26,7 +26,6 @@ public class EqualSubset416 {
 			Arrays.fill(arr, -1);
 		}
 		return isEqualSubsetAvailable1(nums, 0, 0, sum / 2, dp);
-
 	}
 
 	private static boolean isEqualSubsetAvailable1(int[] arr, int i, int curSum, int sum,
@@ -48,7 +47,6 @@ public class EqualSubset416 {
 		boolean result = result1 || result2;
 		dp[i][curSum] = result == true ? 1 : 2;
 		return result;
-
 	}
 
 
@@ -58,7 +56,6 @@ public class EqualSubset416 {
 			return false;
 		}
 		return isEqualSubsetAvailable2(arr, sum / 2);
-
 	}
 
 	private static boolean isEqualSubsetAvailable2(int[] arr, int target) {
@@ -109,5 +106,4 @@ public class EqualSubset416 {
 		}
 		return dp[arr.length][sum];
 	}
-
 }

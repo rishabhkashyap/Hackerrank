@@ -3,7 +3,7 @@ package com.problem.solutions.leetcode;
 
 import java.util.Arrays;
 
-public class MinCostTicket {
+public class MinCostTicket983 {
     public static void main(String[] args) {
 //        int[] days = {1, 4, 6, 7, 8, 20};
 //        int[] costs = {2, 7, 15};

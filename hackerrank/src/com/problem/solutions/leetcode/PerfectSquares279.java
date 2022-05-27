@@ -1,7 +1,6 @@
 package com.problem.solutions.leetcode;
 
 import java.util.Arrays;
-import java.util.stream.IntStream;
 
 //Problem: https://leetcode.com/problems/perfect-squares/
 

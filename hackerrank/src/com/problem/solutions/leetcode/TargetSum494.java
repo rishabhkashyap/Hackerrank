@@ -15,6 +15,7 @@ public class TargetSum494 {
 		System.out.println(countWays(arr, s));
 		System.out.println(findWays(arr, s));
 		System.out.println(countWays2(arr, s));
+		System.out.println(countWays3(arr, s));
 	}
 
 	private static int countWays(int[] arr, int s) {
@@ -116,5 +117,39 @@ public class TargetSum494 {
 		}
 		return dp[arr.length][partitionSum];
 
+	}
+
+	//Recursive 0/1 knapsack
+	private static int countWays3(int[] arr, int diff) {
+		int sum = Arrays.stream(arr).sum();
+		if(sum < Math.abs(diff) || (sum + diff) % 2 != 0) {
+			return 0;
+		}
+		int[][] dp = new int[arr.length + 1][(diff + sum) / 2 + 1];
+		for (int[] dpArr : dp) {
+			Arrays.fill(dpArr, -1);
+		}
+		return countWays3(arr, (diff + sum) / 2, arr.length - 1, dp);
+
+	}
+
+	private static int countWays3(int[] arr, int sum, int i, int[][] dp) {
+		//check till i==-1 because entire array has to be covered to get target sum
+		//by performing add and sub operations
+		if(i == -1 && sum == 0) {
+			return 1;
+		}
+		if(i < 0 || sum < 0) {
+			return 0;
+		}
+		if(dp[i][sum] != -1) {
+			return dp[i][sum];
+		}
+		if(sum < arr[i]) {
+			return countWays3(arr, sum, i - 1, dp);
+		}
+		dp[i][sum] = countWays3(arr, sum, i - 1, dp)
+				+ countWays3(arr, sum - arr[i], i - 1, dp);
+		return dp[i][sum];
 	}
 }

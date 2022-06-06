@@ -3,7 +3,7 @@ package com.problem.solutions.leetcode;
 
 import java.util.Arrays;
 
-public class IntegerBreak {
+public class IntegerBreak343 {
     public static void main(String[] args) {
         int num = 10;
         System.out.println(getMaxProduct(num));

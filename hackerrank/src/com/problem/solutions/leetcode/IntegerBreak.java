@@ -8,6 +8,7 @@ public class IntegerBreak {
         int num = 10;
         System.out.println(getMaxProduct(num));
         System.out.println(getMaxProduct2(num));
+        System.out.println(getMaxProduct3(num));
     }
 
     private static int getMaxProduct(int num) {
@@ -46,6 +47,33 @@ public class IntegerBreak {
             }
         }
         return dp[num];
+    }
+
+    private static int getMaxProduct3(int n) {
+        int[][] dp = new int[n][n + 1];
+        for (int[] arr : dp) {
+            Arrays.fill(arr, -1);
+        }
+        return getMaxProduct3(n, n-1, dp);
+    }
+
+    private static int getMaxProduct3(int n, int i, int[][] dp) {
+        if (n < 0 || i <= 0) {
+            return 0;
+        }
+        if (n == 0) {
+            return 1;
+        }
+        if (dp[i][n] != -1) {
+            return dp[i][n];
+        }
+        if (n < i) {
+            return getMaxProduct3(n, i - 1, dp);
+        }
+        int result1 = i * getMaxProduct3(n - i, i, dp);
+        int result2 = getMaxProduct3(n, i - 1, dp);
+        return dp[i][n] = Math.max(result1, result2);
+
     }
 
 

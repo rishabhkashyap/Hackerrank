@@ -46,7 +46,6 @@ public class PalindromeCut132 {
             ++i;
             --j;
         }
-
         return true;
     }
 }

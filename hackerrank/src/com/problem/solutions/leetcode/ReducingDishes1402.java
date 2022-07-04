@@ -3,6 +3,7 @@ package com.problem.solutions.leetcode;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+
 //Problem: https://leetcode.com/problems/reducing-dishes/
 public class ReducingDishes1402 {
     public static void main(String[] args) {

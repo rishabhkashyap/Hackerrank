@@ -46,18 +46,16 @@ public class Stock188 {
         }
         int op1 = 0;
         int op2 = 0;
-        int op3 = 0;
-        int op4 = 0;
         if (canSell == 0) {
             op1 = maxProfit2(prices, i + 1, 1, k, dp) - prices[i];
             op2 = maxProfit2(prices, i + 1, 0, k, dp);
         }
         if (canSell == 1) {
-            op3 = maxProfit2(prices, i + 1, 0, k - 1, dp) + prices[i];
-            op4 = maxProfit2(prices, i + 1, 1, k, dp);
+            op1 = maxProfit2(prices, i + 1, 0, k - 1, dp) + prices[i];
+            op2 = maxProfit2(prices, i + 1, 1, k, dp);
 
         }
-        dp[i][canSell][k] = Math.max(Math.max(op1, op2), Math.max(op3, op4));
+        dp[i][canSell][k] = Math.max(op1, op2);
         return dp[i][canSell][k];
     }
 }

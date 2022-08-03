@@ -8,7 +8,7 @@ import java.util.StringTokenizer;
 
 //Problem:https://leetcode.com/problems/house-robber-ii/description/
 
-public class HouseRober2 {
+public class HouseRober213 {
 
     public static void main(String[] args) throws IOException {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
@@ -20,6 +20,7 @@ public class HouseRober2 {
         }
 
         System.out.println(getMaxAmount(arr.length, arr));
+        System.out.println(maxAmount(arr));
     }
 
     private static int getMaxAmount(int i, int[] arr) {
@@ -73,6 +74,32 @@ public class HouseRober2 {
 
 
         dp[i] = Math.max(result1, result2);
+        return dp[i];
+    }
+
+    //Simpler solution
+    private static int maxAmount(int[] nums) {
+        if (nums.length == 1) {
+            return nums[0];
+        }
+        int[] dp = new int[nums.length];
+        Arrays.fill(dp, -1);
+        int pattern1 = maxAmount(nums, 0, nums.length - 2, dp);
+        Arrays.fill(dp, -1);
+        int pattern2 = maxAmount(nums, 1, nums.length - 1, dp);
+        return Math.max(pattern1, pattern2);
+    }
+
+    private static int maxAmount(int[] nums, int i, int j, int[] dp) {
+        if (i > j) {
+            return 0;
+        }
+        if (dp[i] != -1) {
+            return dp[i];
+        }
+        int op1 = maxAmount(nums, i + 1, j, dp);
+        int op2 = maxAmount(nums, i + 2, j, dp) + nums[i];
+        dp[i] = Math.max(op1, op2);
         return dp[i];
     }
 

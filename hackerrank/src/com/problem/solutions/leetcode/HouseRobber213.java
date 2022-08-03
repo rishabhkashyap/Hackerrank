@@ -8,7 +8,7 @@ import java.util.StringTokenizer;
 
 //Problem:https://leetcode.com/problems/house-robber-ii/description/
 
-public class HouseRober213 {
+public class HouseRobber213 {
 
     public static void main(String[] args) throws IOException {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));

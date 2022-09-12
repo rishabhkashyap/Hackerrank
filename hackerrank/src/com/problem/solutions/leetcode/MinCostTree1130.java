@@ -8,7 +8,7 @@ import java.util.StringTokenizer;
 
 //Problem: https://leetcode.com/problems/minimum-cost-tree-from-leaf-values/
 
-public class MinCostTree {
+public class MinCostTree1130 {
 
     public static void main(String[] args) throws IOException {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));

@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.StringTokenizer;
 
-//Problem: https://leetcode.com/problems/minimum-cost-tree-from-leaf-values/submissions/
+//Problem: https://leetcode.com/problems/minimum-cost-tree-from-leaf-values/
 
 public class MinCostTree {
 

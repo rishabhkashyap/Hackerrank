@@ -39,6 +39,7 @@ public class SumTriplet15 {
                 int temp = arr[low] + arr[high] + arr[i];
                 if (temp == 0) {
                     result.add(Arrays.asList(arr[i], arr[low], arr[high]));
+                    //Increment low and high to avoid any duplicates
                     --high;
                     ++low;
                 } else if (temp < 0) {

@@ -5,6 +5,7 @@ public class MaxDifference2016 {
     public static void main(String[] args) {
         int[] nums = {7, 1, 5, 4};
         System.out.println(findMaxDiff(nums));
+        System.out.println(maximumDifference(nums));
     }
 
     private static int findMaxDiff(int[] nums) {
@@ -25,5 +26,17 @@ public class MaxDifference2016 {
         }
         return result;
     }
-}
+
+    //Similar to buy and sell stock
+    private static int maximumDifference(int[] nums) {
+        int min=Integer.MAX_VALUE;
+        int result=-1;
+        for(int i=0;i<nums.length;i++){
+            result=Math.max(result,nums[i]-min);
+            min=Math.min(min,nums[i]);
+        }
+        return result==0?-1:result;
+
+    }
+
 }

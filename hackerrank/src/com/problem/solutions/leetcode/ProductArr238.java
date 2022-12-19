@@ -5,10 +5,14 @@ import java.util.Arrays;
 //Problem: https://leetcode.com/problems/product-of-array-except-self/description/
 public class ProductArr238 {
     public static void main(String[] args) {
-        int[] arr={1,2,3,4};
+       // int[] arr={1,2,3,4};
+        int[] arr={-1,1,0,-3,3};
         int[] result=computeProduct1(arr);
         Arrays.stream(result).forEach(e->System.out.print(e+"\t"));
         result=productCompute2(arr);
+        System.out.println();
+        Arrays.stream(result).forEach(e->System.out.print(e+"\t"));
+        result=productCompute3(arr);
         System.out.println();
         Arrays.stream(result).forEach(e->System.out.print(e+"\t"));
     }
@@ -50,6 +54,22 @@ public class ProductArr238 {
             postProd*=arr[i+1];
             result[i]=result[i]*postProd;
         }
+        return result;
+    }
+
+    private static int[] productCompute3(int[] arr){
+        int[] result = new int[arr.length];
+        int preProduct=1;
+        result[0]=arr[0];
+        for(int i=1;i<arr.length;i++){
+            result[i]=result[i-1]*arr[i];
+        }
+        int postProd=1;
+        for(int i= arr.length-1;i>0;--i){
+            result[i]=result[i-1]*postProd;
+            postProd*=arr[i];
+        }
+        result[0]=postProd;
         return result;
     }
 }

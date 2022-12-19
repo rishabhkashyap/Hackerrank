@@ -40,7 +40,7 @@ public class ProductArr238 {
     }
 
     //Use same approach as used in computeProduct1, instead of using 2 arrays to store prefix and suffix sum
-    //use one array ie result array to store prefix and suffix sum result. This will save memory
+    //use one array ie result array to store prefix product and a variable to store  post product result. This will save memory
     private static int[] productCompute2(int[] arr){
         int[] result = new int[arr.length];
         //calculate prefix sum
@@ -57,9 +57,9 @@ public class ProductArr238 {
         return result;
     }
 
+
     private static int[] productCompute3(int[] arr){
         int[] result = new int[arr.length];
-        int preProduct=1;
         result[0]=arr[0];
         for(int i=1;i<arr.length;i++){
             result[i]=result[i-1]*arr[i];

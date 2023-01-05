@@ -65,7 +65,7 @@ public class MatrixZero73 {
             }
         }
         for (int i = 1; i < arr.length; i++) {
-            for (int j = 0; j < arr[0].length; j++) {
+            for (int j = 1; j < arr[0].length; j++) {
                 if (arr[i][0] == 0 || arr[0][j] == 0) {
                     arr[i][j] = 0;
                 }

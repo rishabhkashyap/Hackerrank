@@ -82,12 +82,11 @@ public class BinaryTreePath257 {
         if (root == null) {
             return;
         }
-        String currentPath = pair.path;
-        currentPath = currentPath + root.val;
-        getPaths3(root.left, new Pair(root.left, currentPath + "->"), result);
-        getPaths3(root.right, new Pair(root.right, currentPath + "->"), result);
+        pair.path = pair.path + root.val;
+        getPaths3(root.left, new Pair(root.left, pair.path + "->"), result);
+        getPaths3(root.right, new Pair(root.right, pair.path + "->"), result);
         if (root.left == null && root.right == null) {
-            result.add(currentPath);
+            result.add(pair.path);
 
 
         }

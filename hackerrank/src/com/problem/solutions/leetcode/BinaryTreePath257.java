@@ -50,7 +50,7 @@ public class BinaryTreePath257 {
         }
     }
 
-
+    //Iterative solution
     private static List<String> getPaths2(TreeNode root) {
         Stack<Pair> stack = new Stack<>();
         stack.push(new Pair(root, ""));

@@ -1,6 +1,6 @@
 package com.problem.solutions.leetcode;
 //https://leetcode.com/problems/find-peak-element/description/
-public class PealElement162 {
+public class PeakElement162 {
     public static void main(String[] args) {
         int[] arr = {1, 2, 3, 1};
         System.out.println(findPeakElement(arr));

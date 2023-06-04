@@ -2,6 +2,7 @@ package com.problem.solutions.leetcode;
 
 import java.util.PriorityQueue;
 import java.util.Queue;
+
 //Problem: https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/description/
 public class KthEleSortedMatrix378 {
     public static void main(String[] args) {
@@ -29,6 +30,7 @@ public class KthEleSortedMatrix378 {
         return low;
     }
 
+    //counting number of elements smaller than target(bottom left)
     private static int findSmallElementCount(int[][] arr, int target) {
         int i = arr.length - 1;
         int j = 0;
@@ -37,12 +39,31 @@ public class KthEleSortedMatrix378 {
             if (arr[i][j] > target) {
                 --i;
             } else {
-                ++j;
+                //arr[i][j] is smaller than target and columns are sorted in ascending order
+                //that means all the elements(arr[i][j] arr[i-1][j] ... arr[0][j]) in upper rows
+                //and same columns will be smaller than target element.To count all of those
+                //elements add i+1 and move to next column
                 count += i + 1;
+                ++j;
             }
         }
         return count;
     }
+    //counting number of elements smaller than target(top right)
+//    private static int findSmallElementCount(int[][] arr, int target) {
+//        int i = 0;
+//        int j = arr.length-1;
+//        int count = 0;
+//        while (j >= 0 && i < arr.length) {
+//            if (arr[i][j] > target) {
+//                --j;
+//            } else {
+//                ++i;
+//                count += j + 1;
+//            }
+//        }
+//        return count;
+//    }
 
     private static int findKthSmallestElement2(int[][] arr, int k) {
         Queue<Integer> maxHeap = new PriorityQueue<>(k, (e1, e2) -> e2 - e1);

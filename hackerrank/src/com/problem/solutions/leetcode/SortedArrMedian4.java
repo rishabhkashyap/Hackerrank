@@ -17,6 +17,8 @@ public class SortedArrMedian4 {
         int high = arr1.length;
         while (low <= high) {
             int cut1 = (low + high) / 2;
+            //(arr1.length + arr2.length + 1) / 2 : this ensures that in case of odd number of elements, first partition
+            // will always have one more element than second partition
             int cut2 = (arr1.length + arr2.length + 1) / 2 - cut1;
             int max1 = (cut1 - 1 >= 0) ? arr1[cut1 - 1] : Integer.MIN_VALUE;
             int max2 = (cut2 - 1 >= 0) ? arr2[cut2 - 1] : Integer.MIN_VALUE;

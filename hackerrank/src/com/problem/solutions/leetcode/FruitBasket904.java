@@ -19,9 +19,8 @@ public class FruitBasket904 {
         int maxFruitCount = Integer.MIN_VALUE;
         int start = 0;
         int end = 0;
-        while (start < arr.length && end < arr.length) {
-            int count = map.getOrDefault(arr[end], 0);
-            map.put(arr[end], ++count);
+        while (end < arr.length) {
+            map.put(arr[end], map.getOrDefault(arr[end], 0)+1);
             while (map.size() > 2) {
                 int freq = map.get(arr[start]);
                 if (--freq == 0) {
@@ -31,8 +30,9 @@ public class FruitBasket904 {
                 }
                 ++start;
             }
-            maxFruitCount = Math.max(maxFruitCount,
-                    map.values().stream().reduce(0, Integer::sum));
+            if (map.size() <= 2) {
+                maxFruitCount = Math.max(maxFruitCount, end - start + 1);
+            }
             ++end;
         }
         return maxFruitCount;
